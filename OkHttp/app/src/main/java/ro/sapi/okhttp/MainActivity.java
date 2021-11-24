@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public String postUrl = "https://reqres.in/api/users/";
     //public String postUrl2 = "http://10.0.2.2/androidlogin/login.inc2.php";
     //public String postUrl2 = "http://10.0.2.2/androidlogin/login.inc.php";
-    //public String postUrl2 = "http://10.0.2.2/androidlogin/login.inc3.php";
+    public String postUrl2 = "http://10.0.2.2/androidlogin/login.inc3.php";
     public String postBody = "{\n" +
             "    \"name\": \"morpheus\",\n" +
             "    \"job\": \"leader\"\n" +
@@ -67,10 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         JSONObject postdata = new JSONObject();
 
         try {
-            postdata.put("name", "morpheus");
-            postdata.put("job", "leader");
-            //postdata.put("username", "alma@alma.ro");
-            //postdata.put("password", "alma");
+            //postdata.put("name", "morpheus");
+            //postdata.put("job", "leader");
+            postdata.put("username", "alma@alma.ro");
+            postdata.put("password", "alma");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -78,25 +78,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RequestBody body = RequestBody.create(JSON, postdata.toString());
 
         // Create okhttp3 form body builder.
-        //FormBody.Builder formBodyBuilder = new FormBody.Builder();
+        FormBody.Builder formBodyBuilder = new FormBody.Builder();
 
         // Add form parameters
-        //formBodyBuilder.add("username", "alma@alma.ro");
-        //formBodyBuilder.add("password", "alma");
+        formBodyBuilder.add("username", "alma@alma.ro");
+        formBodyBuilder.add("password", "alma");
 
         // Build form body.
-        //FormBody formBody = formBodyBuilder.build();
+        FormBody formBody = formBodyBuilder.build();
 
         //RequestBody body = RequestBody.create(JSON, postBody);
-        Request request = new Request.Builder()
-                .url(postUrl)
-                .post(body)
-                .build();
-
 //        Request request = new Request.Builder()
 //                .url(postUrl)
-//                .post(formBody)
+//                .post(body)
 //                .build();
+
+        Request request = new Request.Builder()
+                .url(postUrl)
+                .post(formBody)
+                .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.asynchronousPost:
                 try {
                     //postRequest(postUrl, postBody);
-                    postRequest(postUrl, postBody);
+                    postRequest(postUrl2, postBody);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
